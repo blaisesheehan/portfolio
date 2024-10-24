@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> <!-- meta elements contained in head, body contains content -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--CSS Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/images/heart_trans.png"
+    />
+
+    <!-- Animate CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>blaise | data scientist </title>
+  </head>
+
+  <body>
+    <nav>
+    <h1>blaise alette</h1>
+    <div class ="social-icons">
+        <a href="https://www.linkedin.com/in/blaisealette/" class="fa fa-linkedin"></a></h2> 
+        <a href="hi" class="fa fa-github"></a></h2> 
+    </div>
+
+    <ul class="navigation">
+      <li><a href="#about" class="nav-link">about</a></li>
+      <li><a href="#projects" class="nav-link">projects</a></li>
+      <li><a href="#resources" class="nav-link">resources</a></li>
+
+    </ul>
+    <button class="burger-menu" id="burger-menu">
+      <ion-icon class="bars" name="menu-outline"></ion-icon>
+    </button>
+</nav>
+
+    <section class="hero" id="about">
+        <div class="slideshow">
+
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="assets/images/ibm_3.jpeg" style="width:100%">
+                <div class="text">Caption Text</div>
+            </div>
+        
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="assets/images/ibm_2.jpeg" style="width:100%">
+                <div class="text">Caption Two</div>
+            </div>
+        
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="assets/images/ibm_1.jpeg" style="width:100%">
+                <div class="text">Caption Three</div>
+            </div>
+        
+        </div>
+        <br>
+        <div class="bio animate__animated animate__shakeX">
+            <h2 class="bio-title">hi, i'm blaise!</h2> 
+            <p class="bio-text">
+            i'm a 3rd year Computer Science student at the University of Bristol. i'm majoring in Computational Neuroscience, Cybersecurity, Human-Computer Interaction and Computer Vision. my dissertation involves adaptive systems and applications of learning models to real-life scenarios. in my free time, i love travelling (when i can afford it), learning about history and forcing myself to run.
+            </p>
+        </div>
+    </section>
+    <section class="more-about">
+        <h2>what's this website?</h2>
+        <p>
+        i made this website both as a test of my 1st year css & html skills, but also 
+        to form a portfolio for various data science projects i've completed. in my opinion,
+        5 lines on a cv is simply not enough! 
+        </p>
+        <p>
+        also, as someone who can't handle not understanding concepts - and sometimes, data science can be pretty tricky. 
+        i've collated some of my favourite resources on the web for : machine learning, data science, data visualization (SQL!) and artificial intelligence.
+        i'm hoping whoever stumbles on here (maybe some other students) might find the resources helpful! 
+        </p>
+        <p>
+        further updates will come : check back soon for a personalised crossword challenge! :D
+        </p>
+    </section>
+
+    <section class="projects" id="projects">
+        <h2 class="projects-title">recent projects & experience</h2>
+        <div class="projects-container">
+          <div class="project-container project-card">
+            <img
+              src="assets/images/amazon_int.png"
+              alt="amazon-internship"
+              loading="lazy"
+              class="project-pic"
+            />
+            <h3 class="project-title">amazon internship</h3>
+            <p class="project-details">
+              various data visualization dashboards written in advanced SQL, AWS Quicksight and SQL server. 
+              followed data engineering processes & cross-checked using excel.
+            </p>
+          </div>
+          <div class="project-container project-card">
+            <img
+              src="assets/images/spiral_int.png"
+              alt="galactica"
+              loading="lazy"
+              class="project-pic"
+            />
+           <h3 class="project-title">galactica</h3>
+            <p class="project-details">
+              Python, Tensorflow & Keras project to classify images of galaxies (Galaxy Zoo V2.0) 
+              into their galaxy shapes using a convolutional neural network. after training with epoch testing,
+              highest accuracy of 86%.
+            </p>
+            <a href="#" target="_blank" class="project-link">Check it Out</a>
+          </div>
+          <div class="project-container project-card">
+            <img
+              src="assets/images/breast cancer assessment.png"
+              alt="bcad"
+              loading="lazy"
+              class="project-pic"
+            />
+            <h3 class="project-title">breast cancer assessment tool</h3>
+            <p class="project-details">
+              Java/JavaFX group project in collaboration with NHS a diagnostic
+              tool to store patient data, predict the best treatments based on data
+              and automate family history (manchester score) calculations
+            </p>
+          </div>
+          
+        </div>
+      </section>
+
+      <section class="Resources" id="resources">
+        <div class ="resources">
+            <h2 class="resources-title">resources</h2>
+            <h3 class = "resources-ex"><a class="resources-ex" href = "https://www.deeplearning.ai/courses/machine-learning-specialization/">Stanford University's Machine Learning Specialization Course</a></h3>
+            <h3 class = "resources-ex"><a class="resources-ex" href = "https://setosa.io/ev/principal-component-analysis/#:~:text=Principal%20component%20analysis%20(PCA)%20is,easy%20to%20explore%20and%20visualize.">Setosa's Interactive Principal Component Analysis Article</a></h3>
+            <h3 class = "resources-ex"><a class="resources-ex" href = "https://www.scribbr.com/statistics/multiple-linear-regression/">Supervised Learning: Regression Concepts (this entire chapter is super useful!) </a></h3>
+
+
+        </div>
+    </section>
+
+    <footer>
+        <p class="copy">&copy; made by blaise sheehan, inspired by kolade chriss</p>
+  </footer>
+    <!-- Website scripts -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Ion icons scripts -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
