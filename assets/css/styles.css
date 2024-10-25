@@ -171,6 +171,11 @@ nav ul li {
 
   }
 
+  .more-about a {
+    color: var(--blue);
+    
+  }
+
   .projects {
     background-color: var(--cream);
     padding: 32px 0;
