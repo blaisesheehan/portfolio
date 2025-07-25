@@ -591,3 +591,12 @@ footer {
   color: #444;
   line-height: 1.5;
 }
+
+
+.about-cont {
+  max-width: 600px; /* or 650px, whatever suits your design */
+  margin: 0 auto;   /* center horizontally */
+  line-height: 1.5;
+  font-size: 1rem; /* adjust if you want it smaller */
+  color: #fff;
+}
