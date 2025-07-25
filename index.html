@@ -1,188 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head> <!-- meta elements contained in head, body contains content -->
+  <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!--CSS Styles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Blaise Sheehan</title>
     <link rel="stylesheet" href="assets/css/styles.css" />
-
-
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="assets/images/heart_trans.png"
-    />
-
-    <!-- Animate CSS CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <title>blaise | data science & ai </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <nav>
-    <h1>blaise alette</h1>
-    <div class ="social-icons">
-        <a href="https://www.linkedin.com/in/blaisealette/" class="fa fa-linkedin"></a></h2> 
-        <a href="https://github.com/blaisesheehan" class="fa fa-github"></a></h2> 
-    </div>
-
-    <ul class="navigation">
-      <li><a href="#about" class="nav-link">about</a></li>
-      <li><a href="#projects" class="nav-link">projects</a></li>
-      <li><a href="#resources" class="nav-link">resources</a></li>
-      <li><a href="#topics" class="nav-link">topics</a></li>
-
-
-    </ul>
-    <button class="burger-menu" id="burger-menu">
-      <ion-icon class="bars" name="menu-outline"></ion-icon>
-    </button>
-</nav>
-
-    <section class="hero" id="about">
-        <div class="slideshow">
-
-            <div class="mySlides fade">
-                <div class="numbertext">1 / 3</div>
-                <img src="assets/images/ibm_3.jpeg" style="width:100%">
-                <div class="text">Caption Text</div>
-            </div>
-        
-            <div class="mySlides fade">
-                <div class="numbertext">2 / 3</div>
-                <img src="assets/images/ibm_2.jpeg" style="width:100%">
-                <div class="text">Caption Two</div>
-            </div>
-        
-            <div class="mySlides fade">
-                <div class="numbertext">3 / 3</div>
-                <img src="assets/images/ibm_1.jpeg" style="width:100%">
-                <div class="text">Caption Three</div>
-            </div>
-        
+    <header class="header">
+      <div class="container profile">
+        <img src="assets/images/roundprofile.png" alt="Profile Picture" class="profile-img"/>
+        <div class="intro-text">
+          <p>Hello, I'm</p>
+          <h1>Blaise Sheehan</h1>
+          <p class="role">CS Graduate</p>
+          <div class="buttons">
+            <a href="assets/resume.pdf" class="btn">Download CV</a>
+            <a href="#contact" class="btn-outline">Contact Info</a>
+          </div>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/blaisealette/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/blaisesheehan" target="_blank"><i class="fab fa-github"></i></a>
+          </div>
         </div>
-        <br>
-        <div class="bio animate__animated animate__shakeX">
-            <h2 class="bio-title">hi, i'm blaise!</h2> 
-            <p class="bio-text">
-            I'm a 3rd year Computer Science student at the University of Bristol. I'm majoring in Computational Neuroscience, Cybersecurity, Human-Computer Interaction and Computer Vision. My dissertation involves adaptive systems and applications of learning models to real-life scenarios. In my free time, I love travelling (when I can afford it), learning about history and running on sunny days!
-            </p>
-        </div>
-    </section>
-    <section class="more-about">
-        <h2>what's this website?</h2>
-        <p>
-        I made this website both as a test of my 1st year CSS & HTML skills, but also 
-        to form a portfolio for various data science projects I've completed. In my opinion,
-        5 lines on a cv is simply not enough! I'll also be experimenting with some 
-        front-end designs and trying to blend a bit of data science into this website,
-        again as a personal challenge! 
-        </p>
-        <p>
-        Also, as someone who really digs online to understand concepts,
-        I've collated some of my favourite resources on the web for: Machine Learning, Data Science, Data Visualization (SQL!) and Artificial Intelligence.
-        I'm hoping whoever stumbles on here (maybe some other students) might find the resources helpful!
-        </p>
+      </div>
+    </header>
 
-        <p>Finally, I use the <a href ="https://www.colorado.edu/artssciences-advising/resource-library/life-skills/the-feynman-technique-in-academic-coaching">Feynman Technique</a> a lot in my studies, and so I've made my own Medium-inspired articles regarding
-        some of my final year modules - these are solely for my own studying, but feel free to check those out too. They have explanations but also 
-    data visualization, some modelling and mathematics in there. </p>
+    <section class="about">
+      <div class="container">
+        <h2>Get To Know More</h2>
+        <div class="about-content">
+          <div class="about-img">
+            <img src="assets/images/roundprofile.png" alt="About Blaise">
+          </div>
+          <div class="about-cards">
+            <div class="card">
+              <i class="fas fa-briefcase"></i>
+              <h3>Experience</h3>
+              <p>Amazon Internship<br>Data Pipelines & Dashboards</p>
+            </div>
+            <div class="card">
+              <i class="fas fa-graduation-cap"></i>
+              <h3>Education</h3>
+              <p>B.Sc. Computer Science<br>Machine Learning, Systems Design</p>
+            </div>
+          </div>
+          <p class="about-description">
+            Passionate about building clean, efficient solutions for real-world problems. From machine learning research to full-stack development, I blend creativity and logic in everything I do.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <section class="projects" id="projects">
-        <h2 class="projects-title">recent projects & experience</h2>
-        <div class="projects-container">
-          <div class="project-container project-card">
-            <img
-              src="assets/images/amazon_int.png"
-              alt="amazon-internship"
-              loading="lazy"
-              class="project-pic"
-            />
-            <h3 class="project-title">amazon internship</h3>
-            <p class="project-details">
-              Various data visualization dashboards written in advanced SQL, AWS Quicksight and SQL server. 
-              Followed data management policies & designed smart & robust data pipelines for various metrics. 
-            </p>
+    <section class="skills">
+      <div class="container">
+        <h2>Explore My Experience</h2>
+        <div class="skills-grid">
+          <div class="skill">
+            <i class="fas fa-code"></i>
+            <p>HTML - Experienced</p>
           </div>
-          <div class="project-container project-card">
-            <img
-              src="assets/images/spiral_int.png"
-              alt="galactica"
-              loading="lazy"
-              class="project-pic"
-            />
-           <h3 class="project-title">galactica</h3>
-            <p class="project-details">
-              Python, Tensorflow & Keras project to classify images of galaxies (Galaxy Zoo V2.0) 
-              into their galaxy shapes using a convolutional neural network. after training with epoch testing,
-              highest accuracy of 86%.
-            </p>
+          <div class="skill">
+            <i class="fas fa-paint-brush"></i>
+            <p>CSS - Experienced</p>
           </div>
-          <div class="project-container project-card">
-            <img
-              src="assets/images/breast cancer assessment.png"
-              alt="bcad"
-              loading="lazy"
-              class="project-pic"
-            />
-            <h3 class="project-title">breast cancer assessment tool</h3>
-            <p class="project-details">
-              Java/JavaFX group project in collaboration with NHS a diagnostic
-              tool to store patient data, predict the best treatments based on data
-              and automate family history (Manchester score) calculations. 
-            </p>
+          <div class="skill">
+            <i class="fab fa-sass"></i>
+            <p>SASS - Intermediate</p>
           </div>
-          
+          <div class="skill">
+            <i class="fab fa-js"></i>
+            <p>JavaScript - Basic</p>
+          </div>
+          <div class="skill">
+            <i class="fab fa-node-js"></i>
+            <p>Node.js - Intermediate</p>
+          </div>
+          <div class="skill">
+            <i class="fas fa-database"></i>
+            <p>PostgreSQL - Basic</p>
+          </div>
+          <div class="skill">
+            <i class="fab fa-git-alt"></i>
+            <p>Git - Intermediate</p>
+          </div>
         </div>
-      </section>
-
-      <section class="Resources" id="resources">
-        <div class ="resources">
-            <h2 class="resources-title">resources</h2>
-            <h3 class = "resources-ex"><a class="resources-ex" href = "https://www.deeplearning.ai/courses/machine-learning-specialization/">Stanford University's Machine Learning Specialization Course</a></h3>
-            <h3 class = "resources-ex"><a class="resources-ex" href = "https://setosa.io/ev/principal-component-analysis/#:~:text=Principal%20component%20analysis%20(PCA)%20is,easy%20to%20explore%20and%20visualize.">Setosa's Interactive Principal Component Analysis Article</a></h3>
-            <h3 class = "resources-ex"><a class="resources-ex" href = "https://www.scribbr.com/statistics/multiple-linear-regression/">Supervised Learning: Regression Concepts (this entire chapter is super useful!) </a></h3>
-
-
-        </div>
+      </div>
     </section>
 
-    <section class="Topics" id="topics">
-        <div class = "topics">
-            <h2 class ="topic-title">topics in data science</h2>
-            <p>content coming soon!</p>
+    <section class="projects">
+      <div class="container">
+        <h2>Browse My Recent Projects</h2>
+        <div class="project-grid">
+          <div class="project-card">
+            <img src="assets/images/amazon_int.png" alt="Amazon Internship"/>
+            <h3>Amazon Internship</h3>
+            <p>Dashboards using SQL, AWS Quicksight and data pipelines.</p>
+            <div class="project-links">
+              <a href="#">GitHub</a>
+              <a href="#">Live Demo</a>
+            </div>
+          </div>
+          <div class="project-card">
+            <img src="assets/images/spiral_int.png" alt="Galactica CNN"/>
+            <h3>Galactica</h3>
+            <p>Galaxy image classification using Python, Tensorflow, CNN.</p>
+            <div class="project-links">
+              <a href="#">GitHub</a>
+              <a href="#">Live Demo</a>
+            </div>
+          </div>
+          <div class="project-card">
+            <img src="assets/images/breast cancer assessment.png" alt="BCAD Tool"/>
+            <h3>BC Assessment Tool</h3>
+            <p>JavaFX tool for NHS: patient data & Manchester score calc.</p>
+            <div class="project-links">
+              <a href="#">GitHub</a>
+              <a href="#">Live Demo</a>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>Get in Touch</h2>
+        <p><i class="fas fa-envelope"></i> example@gmail.com</p>
+        <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/blaisealette/" target="_blank">LinkedIn</a></p>
+      </div>
     </section>
 
     <footer>
-        <p class="copy">&copy; made by blaise sheehan, inspired by kolade chriss</p>
-  </footer>
-    <!-- Website scripts -->
-    <script src="assets/js/app.js"></script>
-
-    <!-- Ion icons scripts -->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
+      <p>&copy; 2025 Blaise Sheehan</p>
+    </footer>
   </body>
 </html>
