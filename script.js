@@ -38,3 +38,23 @@ smoothLinks.forEach(link => {
     navLinks.classList.remove('show');
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Function to wrap digits in a span with class "num"
+  const wrapDigits = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      // Replace digits with wrapped span version
+      const replacedText = node.textContent.replace(/(\d+)/g, '<span class="num">$1</span>');
+      if (replacedText !== node.textContent) {
+        const wrapper = document.createElement('span');
+        wrapper.innerHTML = replacedText;
+        node.replaceWith(wrapper);
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE && node.childNodes) {
+      node.childNodes.forEach(child => wrapDigits(child));
+    }
+  };
+
+  wrapDigits(document.body);
+});
