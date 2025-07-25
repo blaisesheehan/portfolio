@@ -1,143 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Blaise Sheehan</title>
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blaise Sheehan</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Blaise Sheehan</div>
+    <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+    <div class="nav-links">
+      <a href="#about">Who I Am</a>
+      <a href="#skills">What I Do</a>
+      <a href="#projects">Work</a>
+      <a href="#contact">Connect</a>
+    </div>
+  </nav>
 
-  <body>
-    <header class="header">
-      <div class="container profile">
-        <img src="assets/images/roundprofile.png" alt="Profile Picture" class="profile-img"/>
-        <div class="intro-text">
-          <p>Hello, I'm</p>
-          <h1>Blaise Sheehan</h1>
-          <p class="role">CS Graduate</p>
-          <div class="buttons">
-            <a href="assets/resume.pdf" class="btn">Download CV</a>
-            <a href="#contact" class="btn-outline">Contact Info</a>
+  <header class="hero">
+    <img src="assets/images/roundprofile.png" alt="Profile Picture" class="hero-img fade-in"/>
+    <div class="hero-content fade-in">
+      <h1><span>Hello, I’m Blaise</span></h1>
+      <h2>CS Graduate <span> & </span> Problem Solver</h2>
+      <div class="hero-buttons">
+        <a href="assets/resume.pdf" class="btn primary" target="_blank">View My CV</a>
+        <a href="#contact" class="btn secondary">Let’s Talk</a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://www.linkedin.com/in/blaisealette/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/blaisesheehan" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="section fade-in">
+    <h2 class="section-title">A Glimpse Into Me</h2>
+    <p>I’m a CS graduate with a passion for building elegant solutions. I love creating interfaces that feel alive—clean code, subtle animations, and human‑first design.</p>
+  </section>
+
+  <section id="skills" class="section fade-in">
+    <h2 class="section-title"> My Core Skills</h2>
+    <div class="skills-grid">
+      <div class="skill"><i class="fas fa-code"></i><h4>HTML</h4><p>Expert</p></div>
+      <div class="skill"><i class="fas fa-paint-brush"></i><h4>CSS</h4><p>Expert</p></div>
+      <div class="skill"><i class="fab fa-sass"></i><h4>SASS</h4><p>Intermediate</p></div>
+      <div class="skill"><i class="fab fa-js"></i><h4>JavaScript</h4><p>Proficient</p></div>
+      <div class="skill"><i class="fab fa-node-js"></i><h4>Node.js</h4><p>Intermediate</p></div>
+      <div class="skill"><i class="fas fa-database"></i><h4>PostgreSQL</h4><p>Working Knowledge</p></div>
+    </div>
+  </section>
+
+  <section id="projects" class="section fade-in">
+    <h2 class="section-title"> Featured Work</h2>
+    <div class="carousel">
+      <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+      <div class="carousel-track">
+        <div class="project-card">
+          <h4>Elegant Portfolio</h4>
+          <div class="project-links">
+            <a href="#">GitHub</a> • <a href="#">Live</a>
           </div>
-          <div class="social-links">
-            <a href="https://www.linkedin.com/in/blaisealette/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/blaisesheehan" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+        <div class="project-card">
+          <h4>Creative Dashboard</h4>
+          <div class="project-links">
+            <a href="#">GitHub</a> • <a href="#">Live</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <h4>Interactive Visualizer</h4>
+          <div class="project-links">
+            <a href="#">GitHub</a> • <a href="#">Live</a>
           </div>
         </div>
       </div>
-    </header>
+      <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </section>
 
-    <section class="about">
-      <div class="container">
-        <h2>Get To Know More</h2>
-        <div class="about-content">
-          <div class="about-img">
-            <img src="assets/images/roundprofile.png" alt="About Blaise">
-          </div>
-          <div class="about-cards">
-            <div class="card">
-              <i class="fas fa-briefcase"></i>
-              <h3>Experience</h3>
-              <p>Amazon Internship<br>Data Pipelines & Dashboards</p>
-            </div>
-            <div class="card">
-              <i class="fas fa-graduation-cap"></i>
-              <h3>Education</h3>
-              <p>B.Sc. Computer Science<br>Machine Learning, Systems Design</p>
-            </div>
-          </div>
-          <p class="about-description">
-            Passionate about building clean, efficient solutions for real-world problems. From machine learning research to full-stack development, I blend creativity and logic in everything I do.
-          </p>
-        </div>
-      </div>
-    </section>
+  <section id="contact" class="section fade-in">
+    <h2 class="section-title">Let’s Connect</h2>
+    <p class="contact-item">
+      <i class="fas fa-envelope icon"></i>
+      <a href="mailto:blaiseasheehan@gmail.com" class="contact-link">blaiseasheehan@gmail.com</a>
+    </p>
+    <p class="contact-item">
+      <i class="fab fa-linkedin icon"></i>
+      <a href="https://www.linkedin.com/in/blaisealette/" target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
+    </p>
+  </section>
+  
+  
+  
 
-    <section class="skills">
-      <div class="container">
-        <h2>Explore My Experience</h2>
-        <div class="skills-grid">
-          <div class="skill">
-            <i class="fas fa-code"></i>
-            <p>HTML - Experienced</p>
-          </div>
-          <div class="skill">
-            <i class="fas fa-paint-brush"></i>
-            <p>CSS - Experienced</p>
-          </div>
-          <div class="skill">
-            <i class="fab fa-sass"></i>
-            <p>SASS - Intermediate</p>
-          </div>
-          <div class="skill">
-            <i class="fab fa-js"></i>
-            <p>JavaScript - Basic</p>
-          </div>
-          <div class="skill">
-            <i class="fab fa-node-js"></i>
-            <p>Node.js - Intermediate</p>
-          </div>
-          <div class="skill">
-            <i class="fas fa-database"></i>
-            <p>PostgreSQL - Basic</p>
-          </div>
-          <div class="skill">
-            <i class="fab fa-git-alt"></i>
-            <p>Git - Intermediate</p>
-          </div>
-        </div>
-      </div>
-    </section>
+  <footer>
+    <p>&copy; 2025 Blaise Sheehan. Built with passion and subtle elegance.</p>
+  </footer>
 
-    <section class="projects">
-      <div class="container">
-        <h2>Browse My Recent Projects</h2>
-        <div class="project-grid">
-          <div class="project-card">
-            <img src="assets/images/amazon_int.png" alt="Amazon Internship"/>
-            <h3>Amazon Internship</h3>
-            <p>Dashboards using SQL, AWS Quicksight and data pipelines.</p>
-            <div class="project-links">
-              <a href="#">GitHub</a>
-              <a href="#">Live Demo</a>
-            </div>
-          </div>
-          <div class="project-card">
-            <img src="assets/images/spiral_int.png" alt="Galactica CNN"/>
-            <h3>Galactica</h3>
-            <p>Galaxy image classification using Python, Tensorflow, CNN.</p>
-            <div class="project-links">
-              <a href="#">GitHub</a>
-              <a href="#">Live Demo</a>
-            </div>
-          </div>
-          <div class="project-card">
-            <img src="assets/images/breast cancer assessment.png" alt="BCAD Tool"/>
-            <h3>BC Assessment Tool</h3>
-            <p>JavaFX tool for NHS: patient data & Manchester score calc.</p>
-            <div class="project-links">
-              <a href="#">GitHub</a>
-              <a href="#">Live Demo</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="contact">
-      <div class="container">
-        <h2>Get in Touch</h2>
-        <p><i class="fas fa-envelope"></i> example@gmail.com</p>
-        <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/blaisealette/" target="_blank">LinkedIn</a></p>
-      </div>
-    </section>
-
-    <footer>
-      <p>&copy; 2025 Blaise Sheehan</p>
-    </footer>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
