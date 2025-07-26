@@ -60,58 +60,78 @@ document.addEventListener('DOMContentLoaded', () => {
 // CAROUSEL + LIGHTBOX
 // =========================
 document.addEventListener('DOMContentLoaded', () => {
-  const track = document.querySelector('.carousel-track');
   const slides = document.querySelectorAll('.carousel-slide');
   const nextBtn = document.querySelector('.carousel-btn.next');
   const prevBtn = document.querySelector('.carousel-btn.prev');
   const indicators = document.querySelectorAll('.indicator');
+  const carousel = document.querySelector('.carousel-container');
 
-  if (!track || slides.length === 0) return;
+  const lightbox = document.querySelector('.lightbox');
+  const lightboxImg = document.querySelector('.lightbox img');
+  const lightboxClose = document.querySelector('.lightbox-close');
+  const imageItems = document.querySelectorAll('.image-item');
+
+  if (!slides.length) return;
 
   let current = 0;
   let autoPlayInterval;
+  let isTransitioning = false;
 
-  function updateCarousel() {
-    track.style.transform = `translateX(-${current * 100}%)`;
-    indicators.forEach((ind, i) => ind.classList.toggle('active', i === current));
-  }
+  const showSlide = index => {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    slides.forEach((s, i) => s.classList.toggle('active', i === index));
+    indicators.forEach((ind, i) => ind.classList.toggle('active', i === index));
+    setTimeout(() => isTransitioning = false, 400);
+  };
 
-  function nextSlide() {
-    current = (current + 1) % slides.length;
-    updateCarousel();
-  }
+  const nextSlide = () => { current = (current + 1) % slides.length; showSlide(current); };
+  const prevSlide = () => { current = (current - 1 + slides.length) % slides.length; showSlide(current); };
 
-  function prevSlide() {
-    current = (current - 1 + slides.length) % slides.length;
-    updateCarousel();
-  }
+  const startAutoPlay = () => { autoPlayInterval = setInterval(nextSlide, 5000); };
+  const resetAutoPlay = () => { clearInterval(autoPlayInterval); startAutoPlay(); };
 
-  const startAutoPlay = () => autoPlayInterval = setInterval(nextSlide, 5000);
-  const stopAutoPlay = () => clearInterval(autoPlayInterval);
+  nextBtn?.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+  prevBtn?.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
 
-  nextBtn?.addEventListener('click', () => { nextSlide(); stopAutoPlay(); startAutoPlay(); });
-  prevBtn?.addEventListener('click', () => { prevSlide(); stopAutoPlay(); startAutoPlay(); });
   indicators.forEach((ind, i) => {
     ind.addEventListener('click', () => {
-      current = i;
-      updateCarousel();
-      stopAutoPlay(); startAutoPlay();
+      if (i !== current) { current = i; showSlide(current); resetAutoPlay(); }
     });
   });
 
-  // swipe support
+  // swipe
   let startX = 0;
-  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-  track.addEventListener('touchend', e => {
+  carousel?.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+  carousel?.addEventListener('touchend', e => {
     const diff = startX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
-    stopAutoPlay(); startAutoPlay();
+    resetAutoPlay();
   });
 
-  updateCarousel();
+  carousel?.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+  carousel?.addEventListener('mouseleave', startAutoPlay);
+
+  // Lightbox
+  imageItems.forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  const closeLightbox = () => {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(() => lightboxImg.src = '', 200);
+  };
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox(); });
+
+  showSlide(current);
   startAutoPlay();
 });
-
 
 // =========================
 // NAVBAR SCROLL BEHAVIOR
