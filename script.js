@@ -1,175 +1,379 @@
-// =========================
-// NAV MENU TOGGLE
-// =========================
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-menuToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('show');
-});
 
-// =========================
-// FADE-IN ON SCROLL (IntersectionObserver)
-// =========================
-const faders = document.querySelectorAll('.fade-in');
-const appearOnScroll = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    entry.target.classList.add('appear');
-    observer.unobserve(entry.target);
-  });
-}, { threshold: 0.2, rootMargin: "0px 0px -50px 0px" });
+class Navigation {
+  constructor() {
+    this.navbar = document.querySelector('.navbar');
+    this.navLinks = document.querySelector('.nav-links');
+    this.menuToggle = document.querySelector('.menu-toggle');
+    this.links = document.querySelectorAll('.nav-link');
+    this.lastScrollY = window.scrollY;
+    
+    this.init();
+  }
 
-faders.forEach(fader => appearOnScroll.observe(fader));
+  init() {
+    this.menuToggle?.addEventListener('click', () => this.toggleMobileMenu());
+    
+    this.links.forEach(link => {
+      link.addEventListener('click', (e) => this.handleLinkClick(e, link));
+    });
 
-// =========================
-// SMOOTH SCROLL LINKS
-// =========================
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', e => {
-    const target = document.querySelector(link.getAttribute('href'));
+    window.addEventListener('scroll', () => this.handleScroll());
+    
+    document.addEventListener('click', (e) => this.handleOutsideClick(e));
+    window.addEventListener('scroll', () => this.updateActiveLink());
+  }
+
+  toggleMobileMenu() {
+    this.navLinks.classList.toggle('show');
+    const icon = this.menuToggle.querySelector('i');
+    icon.className = this.navLinks.classList.contains('show') ? 'fas fa-times' : 'fas fa-bars';
+  }
+
+  handleLinkClick(e, link) {
+    e.preventDefault();
+    const targetId = link.getAttribute('href');
+    const target = document.querySelector(targetId);
+    
     if (target) {
-      e.preventDefault();
-      const offset = 80;
+      const offset = 100; // Account for fixed navbar
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
-      navLinks.classList.remove('show');
+      
+      window.scrollTo({
+        top,
+        behavior: 'smooth'
+      });
+      
+      this.navLinks.classList.remove('show');
+      const icon = this.menuToggle.querySelector('i');
+      icon.className = 'fas fa-bars';
     }
-  });
-});
+  }
 
-// =========================
-// WRAP DIGITS
-// =========================
-document.addEventListener('DOMContentLoaded', () => {
-  const wrapDigits = node => {
-    if (node.nodeType === Node.TEXT_NODE) {
-      const replaced = node.textContent.replace(/(\d+)/g, '<span class="num">$1</span>');
-      if (replaced !== node.textContent) {
-        const span = document.createElement('span');
-        span.innerHTML = replaced;
-        node.replaceWith(span);
+  handleScroll() {
+    const currentScrollY = window.scrollY;
+    
+    if (currentScrollY > this.lastScrollY && currentScrollY > 200) {
+      this.navbar.style.transform = 'translateX(-50%) translateY(-100%)';
+    } else {
+      this.navbar.style.transform = 'translateX(-50%) translateY(0)';
+    }
+    
+    if (currentScrollY > 50) {
+      this.navbar.style.background = 'rgba(15, 15, 15, 0.95)';
+    } else {
+      this.navbar.style.background = 'rgba(15, 15, 15, 0.8)';
+    }
+    
+    this.lastScrollY = currentScrollY;
+  }
+
+  handleOutsideClick(e) {
+    if (!this.navbar.contains(e.target)) {
+      this.navLinks.classList.remove('show');
+      const icon = this.menuToggle.querySelector('i');
+      icon.className = 'fas fa-bars';
+    }
+  }
+
+  updateActiveLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollPos = window.scrollY + 150;
+    
+    sections.forEach(section => {
+      const top = section.getBoundingClientRect().top + window.scrollY;
+      const bottom = top + section.offsetHeight;
+      const id = section.getAttribute('id');
+      const link = document.querySelector(`a[href="#${id}"]`);
+      
+      if (scrollPos >= top && scrollPos < bottom) {
+        this.links.forEach(l => l.classList.remove('active'));
+        link?.classList.add('active');
       }
-    } else if (node.nodeType === Node.ELEMENT_NODE) {
-      node.childNodes.forEach(wrapDigits);
-    }
-  };
-  wrapDigits(document.body);
-});
-
-// =========================
-// CAROUSEL + LIGHTBOX
-// =========================
-document.addEventListener('DOMContentLoaded', () => {
-  const slides = document.querySelectorAll('.carousel-slide');
-  const nextBtn = document.querySelector('.carousel-btn.next');
-  const prevBtn = document.querySelector('.carousel-btn.prev');
-  const indicators = document.querySelectorAll('.indicator');
-  const carousel = document.querySelector('.carousel-container');
-
-  const lightbox = document.querySelector('.lightbox');
-  const lightboxImg = document.querySelector('.lightbox img');
-  const lightboxClose = document.querySelector('.lightbox-close');
-  const imageItems = document.querySelectorAll('.image-item');
-
-  if (!slides.length) return;
-
-  let current = 0;
-  let autoPlayInterval;
-  let isTransitioning = false;
-
-  const showSlide = index => {
-    if (isTransitioning) return;
-    isTransitioning = true;
-    slides.forEach((s, i) => s.classList.toggle('active', i === index));
-    indicators.forEach((ind, i) => ind.classList.toggle('active', i === index));
-    setTimeout(() => isTransitioning = false, 400);
-  };
-
-  const nextSlide = () => { current = (current + 1) % slides.length; showSlide(current); };
-  const prevSlide = () => { current = (current - 1 + slides.length) % slides.length; showSlide(current); };
-
-  const startAutoPlay = () => { autoPlayInterval = setInterval(nextSlide, 5000); };
-  const resetAutoPlay = () => { clearInterval(autoPlayInterval); startAutoPlay(); };
-
-  nextBtn?.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
-  prevBtn?.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
-
-  indicators.forEach((ind, i) => {
-    ind.addEventListener('click', () => {
-      if (i !== current) { current = i; showSlide(current); resetAutoPlay(); }
     });
-  });
+  }
+}
 
-  // swipe
-  let startX = 0;
-  carousel?.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-  carousel?.addEventListener('touchend', e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
-    resetAutoPlay();
-  });
 
-  carousel?.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
-  carousel?.addEventListener('mouseleave', startAutoPlay);
+class AnimationController {
+  constructor() {
+    this.observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    this.init();
+  }
 
-  // Lightbox
-  imageItems.forEach(img => {
-    img.addEventListener('click', () => {
-      lightboxImg.src = img.src;
-      lightbox.classList.add('active');
+  init() {
+    this.setupIntersectionObserver();
+    
+    this.setupSkillBars();
+    
+    this.setupCounters();
+  }
+
+  setupIntersectionObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('appear');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, this.observerOptions);
+
+    document.querySelectorAll('.fade-in, section, .stat-card, .skill-card, .timeline-item, .project-card').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  setupSkillBars() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          const width = bar.style.width;
+          bar.style.width = '0%';
+          setTimeout(() => {
+            bar.style.width = width;
+          }, 500);
+          skillObserver.unobserve(bar);
+        }
+      });
+    }, this.observerOptions);
+
+    skillBars.forEach(bar => skillObserver.observe(bar));
+  }
+
+  setupCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, this.observerOptions);
+
+    counters.forEach(counter => counterObserver.observe(counter));
+  }
+
+  animateCounter(element) {
+    const target = element.textContent;
+    
+    if (target === '∞' || isNaN(parseInt(target))) return;
+    
+    const targetNum = parseInt(target);
+    const duration = 2000;
+    const step = targetNum / (duration / 16);
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= targetNum) {
+        element.textContent = target;
+        clearInterval(timer);
+      } else {
+        element.textContent = Math.floor(current) + (target.includes('%') ? '%' : '');
+      }
+    }, 16);
+  }
+}
+
+class Lightbox {
+  constructor() {
+    this.lightbox = document.querySelector('.lightbox');
+    this.lightboxImg = document.querySelector('#lightbox-img');
+    this.lightboxClose = document.querySelector('.lightbox-close');
+    this.images = document.querySelectorAll('.project-img, .main-preview');
+    
+    this.init();
+  }
+
+  init() {
+    this.images.forEach(img => {
+      img.addEventListener('click', (e) => this.openLightbox(e));
+    });
+
+    this.lightboxClose?.addEventListener('click', () => this.closeLightbox());
+    this.lightbox?.addEventListener('click', (e) => {
+      if (e.target === this.lightbox) this.closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.lightbox.classList.contains('active')) {
+        this.closeLightbox();
+      }
+    });
+  }
+
+  openLightbox(e) {
+    const img = e.target.closest('.project-img, .main-preview')?.querySelector('img') || e.target;
+    if (img && img.src) {
+      this.lightboxImg.src = img.src;
+      this.lightboxImg.alt = img.alt || '';
+      this.lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
-    });
-  });
-  const closeLightbox = () => {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-    setTimeout(() => lightboxImg.src = '', 200);
-  };
-  lightboxClose?.addEventListener('click', closeLightbox);
-  lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox(); });
-
-  showSlide(current);
-  startAutoPlay();
-});
-
-// =========================
-// NAVBAR SCROLL BEHAVIOR
-// =========================
-const navbar = document.querySelector('.navbar');
-let lastScrollY = window.scrollY;
-window.addEventListener('scroll', throttle(() => {
-  const y = window.scrollY;
-  if (y > 100) {
-    navbar.style.background = 'rgba(18,18,23,0.9)';
-    navbar.style.backdropFilter = 'blur(10px)';
-  } else {
-    navbar.style.background = 'transparent';
-    navbar.style.backdropFilter = 'none';
-  }
-  if (y > lastScrollY && y > 200) {
-    navbar.style.transform = 'translateY(-100%)';
-  } else {
-    navbar.style.transform = 'translateY(0)';
-  }
-  lastScrollY = y;
-}, 50));
-
-
-// =========================
-// HELPER: THROTTLE
-// =========================
-function throttle(func, wait) {
-  let timeout = null;
-  let lastArgs;
-  return function (...args) {
-    lastArgs = args;
-    if (!timeout) {
-      func.apply(this, lastArgs);
-      timeout = setTimeout(() => {
-        timeout = null;
-        if (lastArgs) func.apply(this, lastArgs);
-      }, wait);
     }
-  };
+  }
+
+  closeLightbox() {
+    this.lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      this.lightboxImg.src = '';
+    }, 300);
+  }
+}
+
+// =========================
+// PROJECT GALLERY
+// =========================
+class ProjectGallery {
+  constructor() {
+    this.galleries = document.querySelectorAll('.project-gallery');
+    this.init();
+  }
+
+  init() {
+    this.galleries.forEach(gallery => {
+      const mainPreview = gallery.querySelector('.main-preview img');
+      const thumbnails = gallery.querySelectorAll('.thumbnail');
+      
+      thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          if (mainPreview && thumb.src) {
+            const tempSrc = mainPreview.src;
+            const tempAlt = mainPreview.alt;
+            
+            mainPreview.src = thumb.src;
+            mainPreview.alt = thumb.alt;
+            
+            thumb.src = tempSrc;
+            thumb.alt = tempAlt;
+          }
+        });
+      });
+    });
+  }
+}
+
+class ScrollIndicator {
+  constructor() {
+    this.indicator = document.querySelector('.scroll-indicator');
+    this.init();
+  }
+
+  init() {
+    this.indicator?.addEventListener('click', () => {
+      const aboutSection = document.querySelector('#about');
+      if (aboutSection) {
+        aboutSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100 && this.indicator) {
+        this.indicator.style.opacity = '0';
+        this.indicator.style.pointerEvents = 'none';
+      }
+    }, { once: true });
+  }
+}
+
+
+class PerformanceUtils {
+  static throttle(func, wait) {
+    let timeout = null;
+    let lastArgs;
+    
+    return function (...args) {
+      lastArgs = args;
+      if (!timeout) {
+        func.apply(this, lastArgs);
+        timeout = setTimeout(() => {
+          timeout = null;
+          if (lastArgs) {
+            func.apply(this, lastArgs);
+          }
+        }, wait);
+      }
+    };
+  }
+
+  static debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
+
+  static preloadImages() {
+    const images = document.querySelectorAll('img[src]');
+    images.forEach(img => {
+      const imageElement = new Image();
+      imageElement.src = img.src;
+    });
+  }
+}
+
+class ThemeSystem {
+  constructor() {
+    this.prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    this.init();
+  }
+
+  init() {
+    this.prefersDark.addEventListener('change', (e) => {
+      this.updateTheme(e.matches);
+    });
+
+    this.updateTheme(this.prefersDark.matches);
+  }
+
+  updateTheme(isDark) {
+
+    document.documentElement.classList.toggle('dark-theme', isDark);
+  }
+}
+
+
+class App {
+  constructor() {
+    this.components = {};
+    this.init();
+  }
+
+  init() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => this.initializeComponents());
+    } else {
+      this.initializeComponents();
+    }
+  }
+
+  initializeComponents() {
+    try {
+      this.components.navigation = new Navigation();
+      this.components.animations = new AnimationController();
+      this.components.lightbox = new Lightbox();
+      this.components.projectGallery = new ProjectGallery();
+      this.components.scrollIndicator = new ScrollIndicator();
+      this.components.themeSystem = new ThemeSystem();
+
+      PerformanceUtils.preloadImages();
+
+      console.log('Portfolio initialized successfully');
+    } catch (error) {
+      console.error('Error initializing portfolio:', error);
+    }
+
+
+  }
 }
