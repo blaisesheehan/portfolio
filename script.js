@@ -1,4 +1,3 @@
-
 class Navigation {
   constructor() {
     this.navbar = document.querySelector('.navbar');
@@ -35,7 +34,7 @@ class Navigation {
     const target = document.querySelector(targetId);
     
     if (target) {
-      const offset = 100; // Account for fixed navbar
+      const offset = 100;
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
       
       window.scrollTo({
@@ -59,9 +58,9 @@ class Navigation {
     }
     
     if (currentScrollY > 50) {
-      this.navbar.style.background = 'rgba(15, 15, 15, 0.95)';
+      this.navbar.style.background = 'rgba(255, 255, 255, 0.95)';
     } else {
-      this.navbar.style.background = 'rgba(15, 15, 15, 0.8)';
+      this.navbar.style.background = 'rgba(255, 255, 255, 0.85)';
     }
     
     this.lastScrollY = currentScrollY;
@@ -93,7 +92,6 @@ class Navigation {
   }
 }
 
-
 class AnimationController {
   constructor() {
     this.observerOptions = {
@@ -106,9 +104,7 @@ class AnimationController {
 
   init() {
     this.setupIntersectionObserver();
-    
     this.setupSkillBars();
-    
     this.setupCounters();
   }
 
@@ -228,9 +224,6 @@ class Lightbox {
   }
 }
 
-// =========================
-// PROJECT GALLERY
-// =========================
 class ProjectGallery {
   constructor() {
     this.galleries = document.querySelectorAll('.project-gallery');
@@ -286,7 +279,6 @@ class ScrollIndicator {
   }
 }
 
-
 class PerformanceUtils {
   static throttle(func, wait) {
     let timeout = null;
@@ -330,50 +322,20 @@ class ThemeSystem {
   }
 
   init() {
+    // Listen for system theme changes
     this.prefersDark.addEventListener('change', (e) => {
-      this.updateTheme(e.matches);
+      if (e.matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
     });
-
-    this.updateTheme(this.prefersDark.matches);
-  }
-
-  updateTheme(isDark) {
-
-    document.documentElement.classList.toggle('dark-theme', isDark);
-  }
-}
-
-
-class App {
-  constructor() {
-    this.components = {};
-    this.init();
-  }
-
-  init() {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => this.initializeComponents());
+  
+    // Set initial theme on load
+    if (this.prefersDark.matches) {
+      document.documentElement.setAttribute('data-theme', 'dark');
     } else {
-      this.initializeComponents();
+      document.documentElement.setAttribute('data-theme', 'light');
     }
-  }
-
-  initializeComponents() {
-    try {
-      this.components.navigation = new Navigation();
-      this.components.animations = new AnimationController();
-      this.components.lightbox = new Lightbox();
-      this.components.projectGallery = new ProjectGallery();
-      this.components.scrollIndicator = new ScrollIndicator();
-      this.components.themeSystem = new ThemeSystem();
-
-      PerformanceUtils.preloadImages();
-
-      console.log('Portfolio initialized successfully');
-    } catch (error) {
-      console.error('Error initializing portfolio:', error);
-    }
-
-
   }
 }
